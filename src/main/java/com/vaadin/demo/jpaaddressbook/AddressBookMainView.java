@@ -25,6 +25,7 @@ import com.vaadin.data.util.filter.Like;
 import com.vaadin.data.util.filter.Or;
 import com.vaadin.demo.jpaaddressbook.PersonEditor.EditorSavedEvent;
 import com.vaadin.demo.jpaaddressbook.PersonEditor.EditorSavedListener;
+import com.vaadin.demo.jpaaddressbook.domain.Cliente;
 import com.vaadin.demo.jpaaddressbook.domain.Department;
 import com.vaadin.demo.jpaaddressbook.domain.Person;
 import com.vaadin.event.FieldEvents.TextChangeEvent;
@@ -58,6 +59,7 @@ public class AddressBookMainView extends HorizontalSplitPanel implements
 
     private JPAContainer<Department> departments;
     private JPAContainer<Person> persons;
+    private JPAContainer<Cliente> clientes;
 
     private Department departmentFilter;
     private String textFilter;
@@ -65,6 +67,9 @@ public class AddressBookMainView extends HorizontalSplitPanel implements
     public AddressBookMainView() {
         departments = new HierarchicalDepartmentContainer();
         persons = JPAContainerFactory.make(Person.class,
+                JpaAddressbookUI.PERSISTENCE_UNIT);
+                
+        clientes = JPAContainerFactory.make(Cliente.class,
                 JpaAddressbookUI.PERSISTENCE_UNIT);
         buildTree();
         buildMainArea();
@@ -76,7 +81,8 @@ public class AddressBookMainView extends HorizontalSplitPanel implements
         VerticalLayout verticalLayout = new VerticalLayout();
         setSecondComponent(verticalLayout);
 
-        personTable = new Table(null, persons);
+        //personTable = new Table(null, persons);
+         personTable = new Table(null, clientes);
         personTable.setSelectable(true);
         personTable.setImmediate(true);
         personTable.addListener(new Property.ValueChangeListener() {

@@ -15,6 +15,7 @@
  */
 package com.vaadin.demo.jpaaddressbook;
 
+import com.vaadin.demo.jpaaddressbook.domain.Cliente;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -68,6 +69,17 @@ public class DemoDataGenerator {
 				.createEntityManager();
 
 		em.getTransaction().begin();
+                // mis cambios
+                //Set<Cliente> gCliente = new HashSet<Cliente>();
+                for (String o : fnames)
+                {
+                Cliente c = new Cliente();
+                c.setNombre(o);
+                em.persist(c);
+                }
+                
+                
+                //
 		Random r = new Random(0);
 		for (String o : officeNames) {
 			Department geoGroup = new Department();
